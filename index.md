@@ -2,4 +2,4 @@
 layout: home
 ---
 
-Principle Agile Engineer, DevOps Methodology, BoringOps and a driver of _Value_.
+Problem solver, DevOps methodologists, BoringOps enthusiast and a driver of _Value_.
