@@ -5,6 +5,10 @@ tags:
   - html
   - js
   - javascript
+  - filtering
+  - search
+  - column
+  - table
 ---
 
 ## Overview
