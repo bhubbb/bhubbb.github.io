@@ -1,3 +1,4 @@
+---
 layout: post
 title: "Install a particular version of a Flatpak package"
 tags:
@@ -14,7 +15,7 @@ I had Cura break on me due to the [Fluidd](https://docs.fluidd.xyz/)/[Moonraker]
 So the simplest thing I thought to do was roll back my Cura version, sadly this is _hard_ with Flatpak and not [exactly supported](https://github.com/flatpak/flatpak/issues/3097).
 
 # How To
-First, you need to figure out what commit version of the app you need (Yep commit not version number). 
+First, you need to figure out what commit version of the app you need (Yep commit not version number).
 ```bash
 flatpak remote-info --log com.ultimaker.cura
 ```
