@@ -28,7 +28,10 @@ pre {
   border: 3px solid #FC7061;
   padding: 1em;
   background-color: #FAFAFA;
+  overflow-x: auto; /* Ensures horizontal scrolling if needed */
+  white-space: pre-wrap; /* Allows text to wrap */
 }
 pre code {
   font-size: large;
+  word-wrap: break-word; /* Breaks long words and wraps them onto the next line */
 }
