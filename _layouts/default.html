@@ -14,11 +14,15 @@
   <body>
     <a href="#main" class="skip-link">Skip to content</a>
     <header>
-      <div class="header-inner">
-        <h1><a href="{{ "/" | absolute_url }}">Brendan Hubble</a></h1>
-        <span class="subtitle">Thoughts &amp; Technology</span>
+      <div class="header-wrapper">
+        <div class="header-inner">
+          <div class="header-title-block">
+            <h1><a href="{{ "/" | absolute_url }}">Brendan Hubble</a></h1>
+            <span class="subtitle">Problem Solver, Agentmancer, DevOps Leader and a driver of Value</span>
+          </div>
+        </div>
+        <button id="theme-toggle" aria-label="Toggle dark mode" class="theme-btn">🌙</button>
       </div>
-      <button id="theme-toggle" aria-label="Toggle dark mode" class="theme-btn">🌙</button>
     </header>
     <main id="main">
       {{ content }}
