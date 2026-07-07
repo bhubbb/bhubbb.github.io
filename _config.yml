@@ -1,6 +1,18 @@
+title: Brendan Hubble
+email: brendan@hubble.io
+description: >-
+  Thoughts and Technology — Brendan Hubble is a problem solver, DevOps specialist,
+  and BoringOps enthusiast sharing practical guides and insights.
+baseurl: ""
+url: "https://bhubbb.github.io"
+
 plugins:
   - jekyll-relative-links
   - jekyll-feed
+
 relative_links:
   enabled: true
   collections: true
+
+feed:
+  path: feed.xml

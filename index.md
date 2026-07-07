@@ -2,4 +2,4 @@
 layout: home
 ---
 
-Problem solver, DevOps methodologists, BoringOps enthusiast and a driver of _Value_.
+Problem Solver, Agentmancer, DevOps Leader and a driver of Value.

@@ -1,37 +1,562 @@
-header {
-  border-bottom: 5px solid #FC7061;
+/* ============================================
+   Variables & Theme
+   ============================================ */
+:root {
+  /* Colors - Light */
+  --color-bg: #FCF4EF;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #F8F1EB;
+  --color-text: #2D323A;
+  --color-text-muted: #6B7280;
+  --color-accent: #D4554A;
+  --color-accent-hover: #B8453B;
+  --color-border: #E5DDD5;
+  --color-code-bg: #F5EFE9;
+  --color-tag-bg: #F0E8E0;
+  --color-tag-text: #8B6914;
+  --color-card-shadow: rgba(0, 0, 0, 0.06);
+  --color-card-shadow-hover: rgba(0, 0, 0, 0.12);
+  --color-header-accent: #D4554A;
+  --color-skip-link: transparent;
+  --color-footer-bottom: var(--color-surface-alt);
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  /* Layout */
+  --max-width: 860px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
 }
-footer {
-  border-top: 5px solid #FC7061;
-  margin-top: 1em;
+
+/* Dark Mode */
+:root.dark {
+  --color-bg: #1A1D23;
+  --color-surface: #23272F;
+  --color-surface-alt: #1E2228;
+  --color-text: #E2E4E9;
+  --color-text-muted: #9CA3AF;
+  --color-accent: #E8735A;
+  --color-accent-hover: #F08A74;
+  --color-border: #333842;
+  --color-code-bg: #1E2228;
+  --color-tag-bg: #2D3340;
+  --color-tag-text: #F5A623;
+  --color-card-shadow: rgba(0, 0, 0, 0.3);
+  --color-card-shadow-hover: rgba(0, 0, 0, 0.5);
+  --color-header-accent: #E8735A;
+  --color-footer-bottom: #1E2228;
 }
-h1,h2,h3 {
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+
+/* ============================================
+   Base & Reset
+   ============================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-h1 a {
-  text-decoration: none;
-  color: #4C5464;
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
+
 body {
-  width: 1024px;
-  margin: 1em auto;
-  background-color: #FCF4EF;
-  color: #4C5464;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  transition: color var(--transition-normal), background-color var(--transition-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
+}
+
 img {
   display: block;
-  width: 75%;
-  margin: 1em auto;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  margin: var(--space-lg) auto;
 }
+
+/* ============================================
+   Skip Link (Accessibility)
+   ============================================ */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-md);
+  background: var(--color-accent);
+  color: #fff;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  z-index: 1000;
+  font-weight: 600;
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: var(--space-sm);
+}
+
+/* ============================================
+   Header
+   ============================================ */
+header {
+  border-bottom: 3px solid var(--color-header-accent);
+  padding: var(--space-xl) 0 var(--space-lg);
+  transition: border-color var(--transition-normal);
+  position: relative;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.theme-btn {
+  position: absolute;
+  top: var(--space-lg);
+  right: var(--space-lg);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  line-height: 1;
+}
+
+header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+header h1 a {
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+header h1 a:hover {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  font-weight: 400;
+  display: none;
+}
+
+/* Theme Toggle */
+.theme-btn:hover {
+  border-color: var(--color-accent);
+  background: var(--color-surface-alt);
+}
+
+/* ============================================
+   Main Content
+   ============================================ */
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-lg) var(--space-2xl);
+}
+
+section {
+  margin-bottom: var(--space-2xl);
+}
+
+h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: var(--space-lg);
+  color: var(--color-text);
+  position: relative;
+  padding-bottom: var(--space-sm);
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--color-accent);
+  border-radius: 2px;
+}
+
+/* ============================================
+   Intro Section
+   ============================================ */
+.intro {
+  margin-bottom: var(--space-2xl);
+}
+
+.intro p {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--color-text);
+}
+
+/* ============================================
+   Post Cards Grid
+   ============================================ */
+.posts-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.post-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  transition: all var(--transition-normal);
+  box-shadow: 0 1px 3px var(--color-card-shadow);
+}
+
+.post-card:hover {
+  background: var(--color-surface-alt);
+  box-shadow: 0 4px 12px var(--color-card-shadow-hover);
+}
+
+.post-card a.post-link,
+.post-card a.post-link:hover {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.post-card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.post-card-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.post-date {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.post-excerpt {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+/* ============================================
+   Tags
+   ============================================ */
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+}
+
+.tag {
+  display: inline-block;
+  background: var(--color-tag-bg);
+  color: var(--color-tag-text);
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 999px;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+
+
+/* ============================================
+   Post Page
+   ============================================ */
+.post-header {
+  margin-bottom: var(--space-xl);
+}
+
+.post-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: var(--space-md);
+  color: var(--color-text);
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.post-meta time {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+}
+
+.post-body {
+  margin-bottom: var(--space-xl);
+}
+
+.post-body p {
+  margin-bottom: var(--space-lg);
+}
+
+.post-body h1,
+.post-body h2 {
+  font-size: 1.4rem;
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-md);
+  color: var(--color-text);
+}
+
+.post-body h3 {
+  font-size: 1.15rem;
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-sm);
+  color: var(--color-text);
+}
+
+.post-body h1:first-child,
+.post-body h2:first-child,
+.post-body h3:first-child {
+  margin-top: 0;
+}
+
+.post-body ul,
+.post-body ol {
+  margin-bottom: var(--space-lg);
+  padding-left: 1.5rem;
+}
+
+.post-body li {
+  margin-bottom: var(--space-sm);
+}
+
+.post-body blockquote {
+  border-left: 3px solid var(--color-accent);
+  padding-left: var(--space-lg);
+  margin: var(--space-lg) 0;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* ============================================
+   Code
+   ============================================ */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--color-code-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background var(--transition-normal);
+}
+
 pre {
-  border: 3px solid #FC7061;
-  padding: 1em;
-  background-color: #FAFAFA;
-  overflow-x: auto; /* Ensures horizontal scrolling if needed */
-  white-space: pre-wrap; /* Allows text to wrap */
+  border: none;
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  background: var(--color-code-bg);
+  overflow-x: auto;
+  margin: var(--space-lg) 0;
+  transition: background var(--transition-normal);
 }
+
 pre code {
-  font-size: large;
-  word-wrap: break-word; /* Breaks long words and wraps them onto the next line */
+  font-size: 0.85rem;
+  line-height: 1.6;
+  background: none;
+  padding: 0;
+  word-wrap: normal;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+footer {
+  border-top: 3px solid var(--color-accent);
+  transition: border-color var(--transition-normal);
+}
+
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-lg) var(--space-lg);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-xl);
+}
+
+.footer-section h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+  padding-bottom: 0;
+}
+
+.footer-section h2::after {
+  display: none;
+}
+
+.footer-section p {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.contact-list,
+.crypto-list {
+  list-style: none;
+  padding: 0;
+}
+
+.contact-list li,
+.crypto-list li {
+  font-size: 0.9rem;
+  margin-bottom: var(--space-xs);
+  padding-left: var(--space-sm);
+}
+
+.crypto-list li {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+}
+
+.crypto-list li strong {
+  flex: 0 0 auto;
+  text-align: right;
+  min-width: 40px;
+}
+
+.crypto-list li code {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  display: inline-flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+  gap: 6px;
+  align-items: baseline;
+}
+
+.footer-bottom {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-md) var(--space-lg);
+  text-align: center;
+  background: var(--color-footer-bottom);
+  border-top: 1px solid var(--color-border);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  transition: background var(--transition-normal);
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (min-width: 600px) {
+  .subtitle {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+  .posts-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    width: 1024px;
+    margin: 0 auto;
+  }
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+  .theme-btn,
+  .skip-link,
+  .post-footer {
+    display: none;
+  }
+
+  body {
+    color: #000;
+    background: #fff;
+  }
+
+  a {
+    color: #000;
+  }
+
+  .post-card {
+    break-inside: avoid;
+  }
 }
