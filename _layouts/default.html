@@ -74,6 +74,20 @@
             return '<span style="white-space:nowrap">' + g + '</span>';
           }).join('');
         });
+
+        // Wrap heading + hr pairs, replace hr with div so width works
+        document.querySelectorAll('.post-body h2, .post-body h3').forEach(function(heading) {
+          var next = heading.nextElementSibling;
+          if (next && next.tagName === 'HR') {
+            var wrapper = document.createElement('div');
+            wrapper.className = 'heading-hr-wrapper';
+            heading.parentNode.insertBefore(wrapper, heading);
+            wrapper.appendChild(heading);
+            var divider = document.createElement('div');
+            divider.className = 'heading-hr';
+            wrapper.appendChild(divider);
+          }
+        });
       })();
     </script>
   </body>
